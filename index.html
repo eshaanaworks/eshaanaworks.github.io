@@ -1,38 +1,140 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+  <!-- Title shown in browser tab -->
   <title>Eshaana Works</title>
+
   <style>
+    /* ===== GENERAL PAGE STYLING ===== */
     body {
-      font-family: Arial;
-      margin: 40px;
-      background: #0d1117;
-      color: #c9d1d9;
+      margin: 0; /* Removes default spacing */
+      font-family: Arial; /* Default font (you can change this later) */
+      background: #0d1117; /* Dark background */
+      color: #c9d1d9; /* Light text */
+      scroll-behavior: smooth; /* Smooth scrolling when clicking links */
     }
-    h1 { color: #58a6ff; }
-    a { color: #58a6ff; }
-    .section { margin-top: 40px; }
+
+    /* ===== HERO SECTION (FIRST SCREEN) ===== */
+    header {
+      height: 100vh; /* Full screen height */
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* Center vertically */
+      padding-left: 10%; /* Space from left */
+      background: linear-gradient(135deg, #0d1117, #161b22); /* Gradient background */
+    }
+
+    /* Main heading style */
+    h1 {
+      font-size: 50px;
+      color: #58a6ff; /* Blue accent */
+      margin: 0;
+    }
+
+    /* ===== SECTION STYLING (PROJECTS, RESEARCH, ETC.) ===== */
+    section {
+      padding: 80px 10%; /* Space around content */
+
+      /* Animation starting state */
+      opacity: 0; /* Hidden */
+      transform: translateY(40px); /* Slightly pushed down */
+
+      transition: all 0.8s ease; /* Smooth animation */
+    }
+
+    /* When section becomes visible */
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== CARD STYLE (BOXES INSIDE SECTIONS) ===== */
+    .card {
+      background: #161b22;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 10px; /* Rounded corners */
+    }
+
+    /* ===== NAVIGATION BAR (TOP RIGHT LINKS) ===== */
+    nav {
+      position: fixed; /* Always stays on screen */
+      top: 20px;
+      right: 40px;
+    }
+
+    /* Navigation links */
+    nav a {
+      color: #58a6ff;
+      margin-left: 20px;
+      text-decoration: none; /* Removes underline */
+    }
+
   </style>
 </head>
+
 <body>
 
-  <h1>Eshaan Works</h1>
+<!-- ===== NAVIGATION MENU ===== -->
+<nav>
+  <!-- These links scroll to sections -->
+  <a href="#projects">Projects</a>
+  <a href="#research">Research</a>
+  <a href="#papers">Papers</a>
+</nav>
+
+<!-- ===== HERO SECTION (FIRST THING PEOPLE SEE) ===== -->
+<header>
+  <h1>Eshaana Works</h1>
   <p>Engineering Portfolio</p>
+</header>
 
-  <div class="section">
-    <h2>Projects</h2>
-    <p>Coming soon...</p>
+<!-- ===== PROJECTS SECTION ===== -->
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="card">
+    <!-- Replace this with your actual projects -->
+    Your project content here
   </div>
+</section>
 
-  <div class="section">
-    <h2>Research</h2>
-    <p>Coming soon...</p>
+<!-- ===== RESEARCH SECTION ===== -->
+<section id="research">
+  <h2>Research</h2>
+  <div class="card">
+    Your research content here
   </div>
+</section>
 
-  <div class="section">
-    <h2>Papers</h2>
-    <p>Coming soon...</p>
+<!-- ===== PAPERS SECTION ===== -->
+<section id="papers">
+  <h2>Papers</h2>
+  <div class="card">
+    Your papers here
   </div>
+</section>
+
+<!-- ===== JAVASCRIPT FOR SCROLL ANIMATION ===== -->
+<script>
+  // Select all sections
+  const sections = document.querySelectorAll("section");
+
+  // Run when user scrolls
+  window.addEventListener("scroll", () => {
+    sections.forEach(sec => {
+
+      // Get position of section relative to screen
+      const top = sec.getBoundingClientRect().top;
+
+      // If section is visible on screen
+      if (top < window.innerHeight - 100) {
+        sec.classList.add("show"); // Trigger animation
+      }
+
+    });
+  });
+</script>
 
 </body>
 </html>
