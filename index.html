@@ -2,45 +2,60 @@
 <html>
 
 <head>
-  <!-- Title shown in browser tab -->
+  <!-- ===== PAGE TITLE (TAB NAME) ===== -->
   <title>Eshaana Works</title>
+
+  <!-- ===== GOOGLE FONT: TYPEWRITER STYLE ===== -->
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
 
   <style>
     /* ===== GENERAL PAGE STYLING ===== */
     body {
-      margin: 0; /* Removes default spacing */
-      font-family: Arial; /* Default font (you can change this later) */
+      margin: 0;
+      font-family: 'Special Elite', monospace; /* Typewriter font */
       background: #0d1117; /* Dark background */
       color: #c9d1d9; /* Light text */
-      scroll-behavior: smooth; /* Smooth scrolling when clicking links */
+      scroll-behavior: smooth; /* Smooth scrolling */
     }
 
-    /* ===== HERO SECTION (FIRST SCREEN) ===== */
+    /* ===== HERO SECTION (FULL SCREEN INTRO) ===== */
     header {
       height: 100vh; /* Full screen height */
       display: flex;
       flex-direction: column;
       justify-content: center; /* Center vertically */
-      padding-left: 10%; /* Space from left */
-      background: linear-gradient(135deg, #0d1117, #161b22); /* Gradient background */
+      padding-left: 10%;
+      background: linear-gradient(135deg, #0d1117, #161b22);
     }
 
-    /* Main heading style */
+    /* ===== MAIN TITLE ===== */
     h1 {
       font-size: 50px;
-      color: #58a6ff; /* Blue accent */
+      color: #58a6ff;
       margin: 0;
     }
 
-    /* ===== SECTION STYLING (PROJECTS, RESEARCH, ETC.) ===== */
+    /* ===== BLINKING CURSOR EFFECT ===== */
+    #typing::after {
+      content: "|";
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* ===== SECTION STYLING ===== */
     section {
-      padding: 80px 10%; /* Space around content */
+      padding: 80px 10%;
 
-      /* Animation starting state */
-      opacity: 0; /* Hidden */
-      transform: translateY(40px); /* Slightly pushed down */
+      /* Animation starting state (hidden) */
+      opacity: 0;
+      transform: translateY(40px);
 
-      transition: all 0.8s ease; /* Smooth animation */
+      transition: all 0.8s ease;
     }
 
     /* When section becomes visible */
@@ -49,26 +64,30 @@
       transform: translateY(0);
     }
 
-    /* ===== CARD STYLE (BOXES INSIDE SECTIONS) ===== */
+    /* ===== CONTENT CARDS ===== */
     .card {
       background: #161b22;
       padding: 20px;
       margin-top: 20px;
-      border-radius: 10px; /* Rounded corners */
+      border-radius: 10px;
     }
 
-    /* ===== NAVIGATION BAR (TOP RIGHT LINKS) ===== */
+    /* ===== NAVIGATION MENU ===== */
     nav {
-      position: fixed; /* Always stays on screen */
+      position: fixed;
       top: 20px;
       right: 40px;
     }
 
-    /* Navigation links */
     nav a {
       color: #58a6ff;
       margin-left: 20px;
-      text-decoration: none; /* Removes underline */
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
     }
 
   </style>
@@ -76,64 +95,94 @@
 
 <body>
 
-<!-- ===== NAVIGATION MENU ===== -->
+<!-- ===== NAVIGATION BAR ===== -->
 <nav>
-  <!-- These links scroll to sections -->
+  <!-- These scroll to sections -->
   <a href="#projects">Projects</a>
   <a href="#research">Research</a>
   <a href="#papers">Papers</a>
 </nav>
 
-<!-- ===== HERO SECTION (FIRST THING PEOPLE SEE) ===== -->
+<!-- ===== HERO SECTION ===== -->
 <header>
-  <h1>Eshaana Works</h1>
+  <!-- This text will be typed automatically -->
+  <h1 id="typing"></h1>
+
+  <!-- Subtitle -->
   <p>Engineering Portfolio</p>
 </header>
 
 <!-- ===== PROJECTS SECTION ===== -->
 <section id="projects">
   <h2>Projects</h2>
+
   <div class="card">
-    <!-- Replace this with your actual projects -->
-    Your project content here
+    <!-- Replace with your real projects -->
+    Example Project: Add description, tech stack, and images here.
   </div>
+
 </section>
 
 <!-- ===== RESEARCH SECTION ===== -->
 <section id="research">
   <h2>Research</h2>
+
   <div class="card">
-    Your research content here
+    Write about your research work here.
   </div>
+
 </section>
 
 <!-- ===== PAPERS SECTION ===== -->
 <section id="papers">
   <h2>Papers</h2>
+
   <div class="card">
-    Your papers here
+    <!-- Example PDF link -->
+    <a href="papers/sample.pdf">Read my paper</a>
   </div>
+
 </section>
 
-<!-- ===== JAVASCRIPT FOR SCROLL ANIMATION ===== -->
+<!-- ===== JAVASCRIPT SECTION ===== -->
 <script>
-  // Select all sections
+
+  /* ===== TYPEWRITER EFFECT ===== */
+
+  const text = "Eshaan Works"; // CHANGE THIS TEXT
+  let index = 0;
+
+  function typeEffect() {
+    if (index < text.length) {
+      document.getElementById("typing").innerHTML += text.charAt(index);
+      index++;
+
+      // Typing speed (lower = faster)
+      setTimeout(typeEffect, 100);
+    }
+  }
+
+  // Start typing when page loads
+  window.onload = typeEffect;
+
+
+  /* ===== SCROLL ANIMATION ===== */
+
   const sections = document.querySelectorAll("section");
 
-  // Run when user scrolls
   window.addEventListener("scroll", () => {
     sections.forEach(sec => {
 
-      // Get position of section relative to screen
       const top = sec.getBoundingClientRect().top;
 
-      // If section is visible on screen
+      // When section enters screen → animate
       if (top < window.innerHeight - 100) {
-        sec.classList.add("show"); // Trigger animation
+        sec.classList.add("show");
       }
 
     });
   });
+
 </script>
 
 </body>
