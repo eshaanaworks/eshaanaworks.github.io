@@ -1,189 +1,1551 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <!-- ===== PAGE TITLE (TAB NAME) ===== -->
-  <title>Eshaana Works</title>
-
-  <!-- ===== GOOGLE FONT: TYPEWRITER STYLE ===== -->
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
-
-  <style>
-    /* ===== GENERAL PAGE STYLING ===== */
-    body {
-      margin: 0;
-      font-family: 'Special Elite', monospace; /* Typewriter font */
-      background: #0d1117; /* Dark background */
-      color: #c9d1d9; /* Light text */
-      scroll-behavior: smooth; /* Smooth scrolling */
-    }
-
-    /* ===== HERO SECTION (FULL SCREEN INTRO) ===== */
-    header {
-      height: 100vh; /* Full screen height */
-      display: flex;
-      flex-direction: column;
-      justify-content: center; /* Center vertically */
-      padding-left: 10%;
-      background: linear-gradient(135deg, #0d1117, #161b22);
-    }
-
-    /* ===== MAIN TITLE ===== */
-    h1 {
-      font-size: 50px;
-      color: #58a6ff;
-      margin: 0;
-    }
-
-    /* ===== BLINKING CURSOR EFFECT ===== */
-    #typing::after {
-      content: "|";
-      animation: blink 1s infinite;
-    }
-
-    @keyframes blink {
-      0% { opacity: 1; }
-      50% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-
-    /* ===== SECTION STYLING ===== */
-    section {
-      padding: 80px 10%;
-
-      /* Animation starting state (hidden) */
-      opacity: 0;
-      transform: translateY(40px);
-
-      transition: all 0.8s ease;
-    }
-
-    /* When section becomes visible */
-    section.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ===== CONTENT CARDS ===== */
-    .card {
-      background: #161b22;
-      padding: 20px;
-      margin-top: 20px;
-      border-radius: 10px;
-    }
-
-    /* ===== NAVIGATION MENU ===== */
-    nav {
-      position: fixed;
-      top: 20px;
-      right: 40px;
-    }
-
-    nav a {
-      color: #58a6ff;
-      margin-left: 20px;
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-  </style>
-</head>
-
-<body>
-
-<!-- ===== NAVIGATION BAR ===== -->
-<nav>
-  <!-- These scroll to sections -->
-  <a href="#projects">Projects</a>
-  <a href="#research">Research</a>
-  <a href="#papers">Papers</a>
-</nav>
-
-<!-- ===== HERO SECTION ===== -->
-<header>
-  <!-- This text will be typed automatically -->
-  <h1 id="typing"></h1>
-
-  <!-- Subtitle -->
-  <p>Engineering Portfolio</p>
-</header>
-
-<!-- ===== PROJECTS SECTION ===== -->
-<section id="projects">
-  <h2>Projects</h2>
-
-  <div class="card">
-    <!-- Replace with your real projects -->
-    Example Project: Add description, tech stack, and images here.
-  </div>
-
-</section>
-
-<!-- ===== RESEARCH SECTION ===== -->
-<section id="research">
-  <h2>Research</h2>
-
-  <div class="card">
-    Write about your research work here.
-  </div>
-
-</section>
-
-<!-- ===== PAPERS SECTION ===== -->
-<section id="papers">
-  <h2>Papers</h2>
-
-  <div class="card">
-    <!-- Example PDF link -->
-    <a href="papers/sample.pdf">Read my paper</a>
-  </div>
-
-</section>
-
-<!-- ===== JAVASCRIPT SECTION ===== -->
-<script>
-
-  /* ===== TYPEWRITER EFFECT ===== */
-
-  const text = "Hi I'm Eshaana!"; // CHANGE THIS TEXT
-  let index = 0;
-
-  function typeEffect() {
-    if (index < text.length) {
-      document.getElementById("typing").innerHTML += text.charAt(index);
-      index++;
-
-      // Typing speed (lower = faster)
-      setTimeout(typeEffect, 100);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eshaana Aurora — Mission Control</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* ── RESET & BASE ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:        #0a0a08;
+    --panel:     #111110;
+    --panel2:    #181815;
+    --border:    #2e2e26;
+    --border2:   #3e3e34;
+    --cream:     #e8e4d4;
+    --muted:     #6b6b58;
+    --gold:      #c8b96a;
+    --gold-dim:  #7a6e3a;
+    --green-crt: #4a9e6a;
+    --green-dim: #2a5e3a;
+    --pink:      #e06090;
+    --pink-dim:  #803050;
+    --teal:      #5abcaa;
+    --teal-dim:  #2a6e60;
+    --rust:      #b06848;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
   }
 
-  // Start typing when page loads
-  window.onload = typeEffect;
+  html { scroll-behavior: smooth; }
 
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: var(--body);
+    cursor: none;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
 
-  /* ===== SCROLL ANIMATION ===== */
+  /* ── CUSTOM CURSOR ── */
+  #cursor {
+    position: fixed; top: 0; left: 0;
+    width: 32px; height: 32px;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+    font-size: 24px;
+    filter: drop-shadow(0 0 4px rgba(200,185,106,0.6));
+  }
+  #cursor-trail {
+    position: fixed; top: 0; left: 0;
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    opacity: 0.4;
+    transition: left 0.12s ease, top 0.12s ease;
+  }
 
-  const sections = document.querySelectorAll("section");
+  /* ── STARS BACKGROUND ── */
+  #starfield {
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 0;
+    overflow: hidden;
+  }
+  .star {
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+    animation: twinkle var(--d, 3s) ease-in-out infinite;
+  }
+  .rocket-bg {
+    position: absolute;
+    font-size: var(--size, 16px);
+    animation: rocket-fly var(--dur, 12s) linear infinite;
+    opacity: 0.15;
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: var(--max, 0.7); transform: scale(1); }
+    50% { opacity: 0.1; transform: scale(0.6); }
+  }
+  @keyframes rocket-fly {
+    0%   { transform: translate(-60px, 110vh) rotate(-45deg); opacity: 0; }
+    5%   { opacity: 0.15; }
+    95%  { opacity: 0.15; }
+    100% { transform: translate(110vw, -60px) rotate(-45deg); opacity: 0; }
+  }
 
-  window.addEventListener("scroll", () => {
-    sections.forEach(sec => {
+  /* ── SCANLINE OVERLAY ── */
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.03) 2px,
+      rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none; z-index: 1;
+  }
 
-      const top = sec.getBoundingClientRect().top;
+  /* ── LAYOUT ── */
+  #app {
+    position: relative; z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 16px;
+  }
 
-      // When section enters screen → animate
-      if (top < window.innerHeight - 100) {
-        sec.classList.add("show");
-      }
+  /* ── PANEL BASE ── */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    position: relative;
+  }
+  .panel::before {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: 4px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .panel-label {
+    font-family: var(--mono);
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    text-transform: uppercase;
+    padding: 6px 10px 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  .panel-label .accent { color: var(--gold); }
+  .panel-label .accent-pink { color: var(--pink); }
+  .panel-label .accent-teal { color: var(--teal); }
 
+  /* ── TOP STATUS BAR ── */
+  #topbar {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr 1fr auto;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: stretch;
+  }
+
+  #logo-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px 16px;
+    display: flex; align-items: center; gap: 12px;
+    min-width: 200px;
+  }
+  .logo-astronaut { font-size: 36px; line-height: 1; }
+  .logo-text h1 {
+    font-family: var(--sans);
+    font-size: 15px; font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+  }
+  .logo-text p {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--gold);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .status-cell {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 12px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .status-cell .s-label {
+    font-family: var(--mono);
+    font-size: 7px; letter-spacing: 0.16em;
+    color: var(--muted); text-transform: uppercase;
+  }
+  .status-cell .s-value {
+    font-family: var(--mono);
+    font-size: 12px; color: var(--cream);
+    letter-spacing: 0.06em;
+  }
+  .status-cell .s-value.go { color: var(--green-crt); }
+  .status-cell .s-value.gold { color: var(--gold); }
+  .status-cell .s-sub {
+    font-family: var(--mono);
+    font-size: 9px; color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  #clock-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 14px;
+    text-align: right;
+    min-width: 160px;
+  }
+  #utc-time {
+    font-family: var(--mono);
+    font-size: 22px; font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+  }
+  #stardate {
+    font-family: var(--mono);
+    font-size: 9px; color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+  }
+
+  /* ── MAIN GRID ── */
+  #main-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr 220px;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  /* LEFT COLUMN */
+  #left-col { display: flex; flex-direction: column; gap: 8px; }
+
+  #orbital-panel {
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    height: 220px;
+    position: relative;
+  }
+  #orbital-canvas {
+    width: 100%; height: 100%;
+  }
+  .orbital-label {
+    position: absolute; top: 6px; left: 8px;
+    font-family: var(--mono); font-size: 7px;
+    letter-spacing: 0.16em; color: var(--teal);
+    text-transform: uppercase;
+  }
+
+  #objective-panel { padding: 10px 12px; }
+  .obj-title {
+    font-family: var(--mono); font-size: 7px;
+    letter-spacing: 0.16em; color: var(--pink);
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .obj-line {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--cream); line-height: 1.6;
+    letter-spacing: 0.04em;
+  }
+
+  #notes-sticky {
+    background: #1c1a10;
+    border: 1px solid var(--gold-dim);
+    border-radius: 4px;
+    padding: 10px 12px;
+    border-top: 3px solid var(--gold);
+  }
+  .sticky-title {
+    font-family: var(--mono); font-size: 7px;
+    letter-spacing: 0.16em; color: var(--gold);
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .sticky-line {
+    font-family: var(--mono); font-size: 9px;
+    color: #b8a86a; line-height: 1.8;
+  }
+
+  /* CRT SCREEN */
+  #crt-panel {
+    background: #050d08;
+    border: 3px solid var(--border2);
+    border-radius: 8px;
+    padding: 28px 32px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 60px rgba(0,0,0,0.8), 0 0 0 1px #1a1a14;
+  }
+  #crt-panel::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(74,158,106,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .crt-sys {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--green-dim); letter-spacing: 0.06em;
+    line-height: 1.8; margin-bottom: 16px;
+  }
+  .crt-sys span { color: var(--green-crt); }
+  .crt-divider {
+    border: none; border-top: 1px dashed var(--green-dim);
+    margin: 16px 0;
+  }
+  #crt-name {
+    font-family: var(--mono); font-size: 36px; font-weight: 500;
+    color: var(--green-crt);
+    letter-spacing: 0.06em;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    text-shadow: 0 0 20px rgba(74,158,106,0.4);
+  }
+  #crt-tagline {
+    font-family: var(--mono); font-size: 12px;
+    color: #7abe8a; letter-spacing: 0.04em;
+    line-height: 1.7; margin-bottom: 20px;
+  }
+  .crt-over {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--green-dim); letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .crt-cursor {
+    display: inline-block;
+    width: 10px; height: 16px;
+    background: var(--green-crt);
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  /* RIGHT COLUMN */
+  #right-col { display: flex; flex-direction: column; gap: 8px; }
+
+  #comms-panel { padding: 10px 12px; }
+  .comms-icon { font-size: 28px; text-align: center; margin-bottom: 8px; }
+  .signal-row {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .sig-label { font-family: var(--mono); font-size: 7px; letter-spacing: 0.12em; color: var(--muted); }
+  .sig-bars { display: flex; gap: 2px; align-items: flex-end; }
+  .sig-bar {
+    width: 5px; background: var(--green-dim); border-radius: 1px;
+    animation: signal-pulse 2s ease-in-out infinite;
+  }
+  .sig-bar:nth-child(1){height:4px; --delay:0s}
+  .sig-bar:nth-child(2){height:7px; --delay:0.1s}
+  .sig-bar:nth-child(3){height:10px; --delay:0.2s}
+  .sig-bar:nth-child(4){height:13px; --delay:0.3s}
+  .sig-bar:nth-child(5){height:16px; --delay:0.4s; background: var(--green-crt);}
+  .sig-bar:nth-child(6){height:13px; --delay:0.5s; background: var(--gold);}
+  @keyframes signal-pulse {
+    0%,100%{opacity:1} 50%{opacity:0.5}
+  }
+  .freq-value {
+    font-family: var(--mono); font-size: 18px; font-weight: 500;
+    color: var(--teal); letter-spacing: 0.1em;
+  }
+  .freq-sub { font-family: var(--mono); font-size: 7px; color: var(--muted); }
+
+  #radar-panel {
+    flex: 1;
+    padding: 8px;
+    min-height: 160px;
+    position: relative;
+    overflow: hidden;
+  }
+  #radar-canvas { width: 100%; height: 150px; display: block; }
+
+  /* ── NAV DIALS ── */
+  #nav-strip {
+    display: grid;
+    grid-template-columns: auto repeat(5, 1fr) auto;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: stretch;
+  }
+
+  .nav-dial-btn {
+    background: var(--panel2);
+    border: 1px solid var(--border2);
+    border-radius: 4px;
+    padding: 10px 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 6px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .nav-dial-btn::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-height(to bottom, rgba(255,255,255,0.03), transparent);
+  }
+  .nav-dial-btn:hover {
+    border-color: var(--gold);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  }
+  .nav-dial-btn:hover .dial-icon { transform: rotate(25deg); }
+  .dial-icon {
+    font-size: 22px;
+    transition: transform 0.3s ease;
+    line-height: 1;
+  }
+  .dial-title {
+    font-family: var(--sans); font-size: 11px; font-weight: 500;
+    color: var(--cream); letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .dial-sub {
+    font-family: var(--mono); font-size: 7px;
+    color: var(--muted); letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .dial-led {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--green-crt);
+    box-shadow: 0 0 4px var(--green-crt);
+    animation: led-pulse 2s ease-in-out infinite;
+  }
+  @keyframes led-pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .dial-led.pink { background: var(--pink); box-shadow: 0 0 4px var(--pink); }
+  .dial-led.teal { background: var(--teal); box-shadow: 0 0 4px var(--teal); }
+  .dial-led.gold { background: var(--gold); box-shadow: 0 0 4px var(--gold); }
+
+  .nav-side-btn {
+    background: var(--panel2);
+    border: 1px solid var(--border2);
+    border-radius: 4px;
+    padding: 10px 14px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 4px;
+    min-width: 60px;
+  }
+  .power-btn {
+    background: #1a0a0a;
+    border: 2px solid #4a1a1a;
+    border-radius: 4px;
+    padding: 10px 14px;
+    cursor: pointer;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 4px;
+    transition: all 0.2s;
+  }
+  .power-btn:hover { border-color: var(--rust); }
+  .power-icon { font-size: 20px; }
+  .power-label { font-family: var(--mono); font-size: 7px; color: var(--rust); letter-spacing: 0.1em; }
+
+  /* ── BOTTOM DATA STRIP ── */
+  #bottom-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 8px;
+  }
+
+  /* TELEMETRY */
+  #telemetry-panel { padding: 8px 10px; }
+  #tele-canvas { width: 100%; height: 70px; display: block; }
+
+  /* SYSTEM CHECK */
+  #syscheck-panel { padding: 10px 12px; }
+  .check-row {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 7px;
+  }
+  .check-label {
+    font-family: var(--mono); font-size: 9px;
+    color: var(--cream); letter-spacing: 0.06em;
+    flex: 1;
+  }
+  .check-bar-bg {
+    width: 70px; height: 5px;
+    background: var(--border); border-radius: 2px;
+    overflow: hidden;
+  }
+  .check-bar-fill {
+    height: 100%; border-radius: 2px;
+    background: var(--green-crt);
+    transition: width 1s ease;
+  }
+  .check-bar-fill.pink { background: var(--pink); }
+  .check-bar-fill.gold { background: var(--gold); }
+  .check-val {
+    font-family: var(--mono); font-size: 8px;
+    color: var(--muted); width: 28px; text-align: right;
+  }
+
+  /* GALACTIC RADAR */
+  #galactic-panel { padding: 8px; position: relative; }
+  #galactic-canvas { width: 100%; height: 100px; display: block; }
+  .you-are-here {
+    position: absolute; bottom: 22px; right: 16px;
+    font-family: var(--mono); font-size: 7px;
+    color: var(--pink); letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* MISSION NOTES */
+  #mission-notes { padding: 10px 12px; }
+  .note-line {
+    font-family: var(--mono); font-size: 9px;
+    color: var(--muted); line-height: 1.8;
+    letter-spacing: 0.03em;
+  }
+  .note-line .comment { color: var(--green-dim); }
+  .note-line .val { color: var(--cream); }
+
+  /* ── SECTION PAGES ── */
+  .page-section {
+    min-height: 100vh;
+    padding: 60px 16px 40px;
+    position: relative; z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-family: var(--mono); font-size: 9px;
+    letter-spacing: 0.2em; color: var(--muted);
+    text-transform: uppercase; margin-bottom: 8px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-eyebrow::before {
+    content: '';
+    display: inline-block; width: 24px; height: 1px;
+    background: var(--gold);
+  }
+  .section-title {
+    font-family: var(--sans); font-size: 42px; font-weight: 300;
+    color: var(--cream); letter-spacing: -0.01em;
+    line-height: 1.1; margin-bottom: 40px;
+  }
+  .back-to-control {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 9px;
+    color: var(--muted); text-decoration: none;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    border: 1px solid var(--border); padding: 6px 14px;
+    border-radius: 3px; transition: all 0.2s;
+    margin-bottom: 40px;
+  }
+  .back-to-control:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* ── ABOUT SECTION ── */
+  #about-section { display: none; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .why-hire-box {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--pink);
+    border-radius: 4px; padding: 24px;
+    margin-bottom: 24px;
+  }
+  .why-title {
+    font-family: var(--sans); font-size: 11px; font-weight: 500;
+    color: var(--pink); letter-spacing: 0.16em;
+    text-transform: uppercase; margin-bottom: 16px;
+  }
+  .why-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    margin-bottom: 12px;
+  }
+  .why-bullet {
+    font-family: var(--mono); font-size: 9px;
+    color: var(--pink); margin-top: 2px; flex-shrink: 0;
+  }
+  .why-text { font-family: var(--body); font-size: 13px; color: var(--cream); line-height: 1.6; }
+  .bio-text {
+    font-family: var(--body); font-size: 14px;
+    color: #b8b4a4; line-height: 1.8;
+    margin-bottom: 16px;
+  }
+  .bio-text strong { color: var(--cream); font-weight: 500; }
+  .edu-block {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 16px; margin-bottom: 10px;
+  }
+  .edu-degree {
+    font-family: var(--sans); font-size: 13px; font-weight: 500;
+    color: var(--cream); margin-bottom: 4px;
+  }
+  .edu-school {
+    font-family: var(--mono); font-size: 9px;
+    color: var(--teal); letter-spacing: 0.1em;
+  }
+
+  /* ── PROJECTS SECTION ── */
+  #projects-section { display: none; }
+  .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .project-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px; padding: 20px;
+    transition: all 0.2s; cursor: pointer;
+    text-decoration: none; display: block;
+    position: relative; overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .project-card.green::before { background: var(--green-crt); }
+  .project-card.pink::before { background: var(--pink); }
+  .project-card.teal::before { background: var(--teal); }
+  .project-card.gold::before { background: var(--gold); }
+  .project-card:hover {
+    border-color: var(--border2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  }
+  .proj-id {
+    font-family: var(--mono); font-size: 8px;
+    color: var(--muted); letter-spacing: 0.18em;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .proj-title {
+    font-family: var(--sans); font-size: 16px; font-weight: 500;
+    color: var(--cream); margin-bottom: 8px; line-height: 1.3;
+  }
+  .proj-desc {
+    font-family: var(--body); font-size: 12px;
+    color: #8a8878; line-height: 1.6; margin-bottom: 14px;
+  }
+  .proj-links { display: flex; flex-wrap: wrap; gap: 6px; }
+  .proj-link {
+    font-family: var(--mono); font-size: 8px;
+    letter-spacing: 0.1em; color: var(--gold);
+    border: 1px solid var(--gold-dim);
+    padding: 3px 10px; border-radius: 2px;
+    text-decoration: none; text-transform: uppercase;
+    transition: all 0.2s;
+  }
+  .proj-link:hover { background: var(--gold); color: var(--bg); }
+
+  /* ── INSIGHTS SECTION ── */
+  #insights-section { display: none; }
+  .blog-empty {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px; padding: 40px;
+    text-align: center; max-width: 600px;
+  }
+  .blog-empty-icon { font-size: 40px; margin-bottom: 16px; }
+  .blog-empty-title {
+    font-family: var(--sans); font-size: 18px; font-weight: 300;
+    color: var(--cream); margin-bottom: 8px;
+  }
+  .blog-empty-sub {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--muted); letter-spacing: 0.08em; line-height: 1.7;
+  }
+  .blog-post-preview {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px; padding: 20px 24px;
+    margin-bottom: 12px; cursor: pointer;
+    transition: all 0.2s;
+    border-left: 3px solid var(--gold);
+  }
+  .blog-post-preview:hover { border-color: var(--gold); transform: translateX(4px); }
+  .blog-date {
+    font-family: var(--mono); font-size: 8px;
+    color: var(--muted); letter-spacing: 0.14em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .blog-title {
+    font-family: var(--sans); font-size: 15px; font-weight: 500;
+    color: var(--cream); margin-bottom: 6px;
+  }
+  .blog-excerpt {
+    font-family: var(--body); font-size: 12px;
+    color: #8a8878; line-height: 1.6;
+  }
+
+  /* ── CONTACT SECTION ── */
+  #contact-section { display: none; }
+  .contact-terminal {
+    background: #050d08;
+    border: 2px solid var(--border2);
+    border-radius: 6px; padding: 28px 32px;
+    max-width: 600px; margin-bottom: 32px;
+  }
+  .contact-line {
+    font-family: var(--mono); font-size: 12px;
+    color: var(--green-dim); line-height: 2;
+    letter-spacing: 0.04em;
+  }
+  .contact-line a {
+    color: var(--green-crt); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-line a:hover { color: var(--gold); }
+  .contact-line .prompt { color: var(--muted); }
+  .contact-links {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    margin-top: 24px;
+  }
+  .contact-link-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--cream); text-decoration: none;
+    border: 1px solid var(--border2); padding: 10px 18px;
+    border-radius: 3px; transition: all 0.2s;
+  }
+  .contact-link-btn:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
+  .contact-link-btn.pink:hover { border-color: var(--pink); color: var(--pink); }
+  .contact-link-btn.teal:hover { border-color: var(--teal); color: var(--teal); }
+
+  /* ── MUSIC PLAYER ── */
+  #music-player {
+    position: fixed; bottom: 16px; right: 16px;
+    background: var(--panel);
+    border: 1px solid var(--border2);
+    border-radius: 4px; padding: 10px 14px;
+    z-index: 100;
+    display: flex; align-items: center; gap: 10px;
+    min-width: 220px;
+  }
+  .mp-status { font-family: var(--mono); font-size: 8px; color: var(--muted); flex: 1; }
+  .mp-track { font-family: var(--mono); font-size: 9px; color: var(--cream); }
+  .mp-btn {
+    background: transparent; border: 1px solid var(--border2);
+    color: var(--muted); font-size: 12px;
+    width: 24px; height: 24px; border-radius: 3px;
+    cursor: pointer; display: flex;
+    align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .mp-btn:hover { border-color: var(--gold); color: var(--gold); }
+  #music-file-note {
+    font-family: var(--mono); font-size: 7px;
+    color: var(--muted); margin-top: 2px;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in { animation: fadeInUp 0.4s ease forwards; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+  /* ── REDUCED MOTION ── */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div id="cursor">🧑‍🚀</div>
+<div id="cursor-trail"></div>
+
+<!-- Stars & Rockets Background -->
+<div id="starfield"></div>
+
+<!-- ════════════════════════════════════════
+     HERO: MISSION CONTROL DASHBOARD
+═════════════════════════════════════════ -->
+<div id="app" id="hero">
+
+  <!-- TOP STATUS BAR -->
+  <div id="topbar">
+    <div id="logo-panel">
+      <div class="logo-astronaut">🧑‍🚀</div>
+      <div class="logo-text">
+        <h1>ESHAANA AURORA</h1>
+        <p>★ Mission Control ★</p>
+      </div>
+    </div>
+
+    <div class="status-cell">
+      <span class="s-label">System Status</span>
+      <span class="s-value go">ALL SYSTEMS: GO ●</span>
+      <span class="s-sub">No anomalies detected</span>
+    </div>
+
+    <div class="status-cell">
+      <span class="s-label">Crew Status</span>
+      <span class="s-value">SOLO OPERATOR 🧑‍🚀</span>
+      <span class="s-sub">Fully caffeinated</span>
+    </div>
+
+    <div class="status-cell">
+      <span class="s-label">Location</span>
+      <span class="s-value gold">EARTH ORBIT</span>
+      <span class="s-sub">28.6139° N · 77.2090° E</span>
+    </div>
+
+    <div id="clock-panel">
+      <div class="s-label" style="text-align:right;margin-bottom:4px">UTC</div>
+      <div id="utc-time">00:00:00</div>
+      <div id="stardate">STARDATE —</div>
+    </div>
+  </div>
+
+  <!-- MAIN GRID -->
+  <div id="main-grid">
+
+    <!-- LEFT COLUMN -->
+    <div id="left-col">
+      <div id="orbital-panel" class="panel">
+        <div class="orbital-label">Orbital View</div>
+        <canvas id="orbital-canvas"></canvas>
+      </div>
+
+      <div id="objective-panel" class="panel">
+        <div class="obj-title">Current Objective</div>
+        <div class="obj-line">
+          Study rocks in space.<br>
+          Build things that work.<br>
+          Sometimes both at once.
+        </div>
+      </div>
+
+      <div id="notes-sticky">
+        <div class="sticky-title">Today's Plan</div>
+        <div class="sticky-line">
+          ☐ Build cool stuff<br>
+          ☐ Solve hard problems<br>
+          ☐ Ask better questions<br>
+          ☐ Remember to eat
+        </div>
+      </div>
+    </div>
+
+    <!-- CRT SCREEN -->
+    <div id="crt-panel">
+      <div class="crt-sys">
+        <span>> INCOMING TRANSMISSION...</span><br>
+        <span>> ESTABLISHING CONNECTION...</span><br>
+        <span>> DECRYPTING SIGNAL...</span>
+      </div>
+      <hr class="crt-divider">
+      <div id="crt-name"></div>
+      <div id="crt-tagline"></div>
+      <div class="crt-over">OVER.</div>
+      <span class="crt-cursor"></span>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div id="right-col">
+      <div id="comms-panel" class="panel">
+        <div class="panel-label"><span class="accent-pink">Communications</span></div>
+        <div style="padding:8px 2px">
+          <div class="comms-icon">🎙️</div>
+          <div class="signal-row">
+            <span class="sig-label">Signal Strength</span>
+            <div class="sig-bars">
+              <div class="sig-bar"></div><div class="sig-bar"></div>
+              <div class="sig-bar"></div><div class="sig-bar"></div>
+              <div class="sig-bar"></div><div class="sig-bar"></div>
+            </div>
+          </div>
+          <div style="margin-top:8px">
+            <div class="freq-sub">Frequency</div>
+            <div class="freq-value">144.8 MHZ</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="radar-panel" class="panel">
+        <div class="panel-label"><span class="accent-teal">Galactic Radar</span></div>
+        <canvas id="radar-canvas"></canvas>
+        <div class="you-are-here">← You are here</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV DIALS -->
+  <div id="nav-strip">
+    <div class="nav-side-btn panel">
+      <span style="font-size:16px">⚙️</span>
+      <span style="font-family:var(--mono);font-size:7px;color:var(--muted)">SYS</span>
+    </div>
+
+    <a href="#" class="nav-dial-btn" onclick="showSection('about')">
+      <div class="dial-led pink"></div>
+      <div class="dial-icon">🧑‍🚀</div>
+      <div class="dial-title">About</div>
+      <div class="dial-sub">Crew Manifest</div>
+    </a>
+
+    <a href="#" class="nav-dial-btn" onclick="showSection('projects')">
+      <div class="dial-led teal"></div>
+      <div class="dial-icon">🛰️</div>
+      <div class="dial-title">Projects</div>
+      <div class="dial-sub">Flight Systems</div>
+    </a>
+
+    <a href="#" class="nav-dial-btn" onclick="showSection('insights')">
+      <div class="dial-led gold"></div>
+      <div class="dial-icon">📡</div>
+      <div class="dial-title">Insights</div>
+      <div class="dial-sub">Captain's Log</div>
+    </a>
+
+    <a href="#" class="nav-dial-btn" onclick="showSection('podcast')">
+      <div class="dial-led pink"></div>
+      <div class="dial-icon">🎙️</div>
+      <div class="dial-title">Space Doubt</div>
+      <div class="dial-sub">Transmissions</div>
+    </a>
+
+    <a href="#" class="nav-dial-btn" onclick="showSection('contact')">
+      <div class="dial-led"></div>
+      <div class="dial-icon">📻</div>
+      <div class="dial-title">Contact</div>
+      <div class="dial-sub">Comms Array</div>
+    </a>
+
+    <div class="power-btn" onclick="alert('nice try.')">
+      <div class="power-icon">🔴</div>
+      <div class="power-label">SYSTEM<br>POWER</div>
+    </div>
+  </div>
+
+  <!-- BOTTOM DATA STRIP -->
+  <div id="bottom-strip">
+    <div id="telemetry-panel" class="panel">
+      <div class="panel-label">Telemetry</div>
+      <canvas id="tele-canvas"></canvas>
+    </div>
+
+    <div id="syscheck-panel" class="panel">
+      <div class="panel-label">System Check</div>
+      <div style="padding:4px 0">
+        <div class="check-row">
+          <span class="check-label">✓ Creativity</span>
+          <div class="check-bar-bg"><div class="check-bar-fill pink" style="width:100%"></div></div>
+          <span class="check-val">100%</span>
+        </div>
+        <div class="check-row">
+          <span class="check-label">✓ Problem Solving</span>
+          <div class="check-bar-bg"><div class="check-bar-fill teal" style="width:100%"></div></div>
+          <span class="check-val">100%</span>
+        </div>
+        <div class="check-row">
+          <span class="check-label">✓ Overthinking</span>
+          <div class="check-bar-bg"><div class="check-bar-fill gold" style="width:87%"></div></div>
+          <span class="check-val">87%</span>
+        </div>
+        <div class="check-row" style="margin-bottom:0">
+          <span class="check-label">✓ Caffeine Levels</span>
+          <div class="check-bar-bg"><div class="check-bar-fill" style="width:100%"></div></div>
+          <span class="check-val">100%</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="galactic-panel" class="panel">
+      <div class="panel-label"><span class="accent-teal">Galactic Radar</span></div>
+      <canvas id="galactic-canvas"></canvas>
+      <div class="you-are-here">← You are here</div>
+    </div>
+
+    <div id="mission-notes" class="panel">
+      <div class="panel-label">Notes from Mission Control</div>
+      <div style="padding:4px 0">
+        <div class="note-line"><span class="comment">// </span><span class="val">No algorithms were harmed</span></div>
+        <div class="note-line"><span class="comment">// </span>in the making of this site.</div>
+        <div class="note-line" style="margin-top:6px"><span class="comment">// </span><span class="val">Built with passion,</span></div>
+        <div class="note-line"><span class="comment">// </span>debugged with patience.</div>
+        <div class="note-line" style="margin-top:6px"><span class="comment">// </span><span class="val">More updates soon...</span> 🚀</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ════════════════════════════════════════
+     SECTION PAGES (shown/hidden via JS)
+═════════════════════════════════════════ -->
+
+<!-- ABOUT -->
+<div id="about-section" class="page-section">
+  <a href="#" class="back-to-control" onclick="showSection('hero')">← Return to Mission Control</a>
+  <div class="section-eyebrow">SYS.01 / Crew Manifest</div>
+  <h2 class="section-title">Why Hire Me?</h2>
+  <div class="about-grid">
+    <div>
+      <div class="why-hire-box">
+        <div class="why-title">The Case for Eshaana</div>
+        <div class="why-item">
+          <span class="why-bullet">▸</span>
+          <span class="why-text">Dual degrees in Mechanical Engineering and Planetary Science from Purdue. In five years. I said what I said.</span>
+        </div>
+        <div class="why-item">
+          <span class="why-bullet">▸</span>
+          <span class="why-text">I build things that work — from flexible PCBs for surgical devices to satellite image processing pipelines. Range is a feature, not a bug.</span>
+        </div>
+        <div class="why-item">
+          <span class="why-bullet">▸</span>
+          <span class="why-text">I grew up watching Chandrayaan missions from India. Now I write research papers about them. Full circle.</span>
+        </div>
+        <div class="why-item">
+          <span class="why-bullet">▸</span>
+          <span class="why-text">I can read a CAD file and a spectral dataset in the same afternoon and make them talk to each other.</span>
+        </div>
+      </div>
+      <p class="bio-text">
+        Growing up in India, I watched the Chandrayaan missions with the kind of obsession most kids reserved for cartoons.
+        That curiosity turned into a Planetary Science degree. The engineering degree came because I realised I didn't just want
+        to <strong>understand</strong> space — I wanted to <strong>build things for it</strong>.
+      </p>
+      <p class="bio-text">
+        Purdue gave me both, in five chaotic, caffeinated years. Along the way I analysed Martian craters,
+        designed a surgical infection-monitoring device that made it to the finals of an Innovation Award,
+        and grew food in a Mars Desert Research Station simulation. Standard stuff.
+      </p>
+      <p class="bio-text">
+        I'm now looking for work that sits at the intersection of engineering, science, and making things
+        that actually go somewhere — literally or figuratively.
+      </p>
+    </div>
+    <div>
+      <div class="edu-block">
+        <div class="edu-degree">B.S. Mechanical Engineering</div>
+        <div class="edu-school">Purdue University · West Lafayette, IN</div>
+      </div>
+      <div class="edu-block">
+        <div class="edu-degree">B.S. Planetary Science</div>
+        <div class="edu-school">Purdue University · West Lafayette, IN</div>
+      </div>
+      <div style="margin-top:24px">
+        <div class="panel-label" style="border:1px solid var(--border);padding:8px 12px;border-radius:4px 4px 0 0;background:var(--panel)">Skills & Tools</div>
+        <div style="background:var(--panel);border:1px solid var(--border);border-top:none;border-radius:0 0 4px 4px;padding:14px 16px;">
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <span class="proj-link" style="color:var(--teal);border-color:var(--teal-dim)">Remote Sensing</span>
+            <span class="proj-link" style="color:var(--teal);border-color:var(--teal-dim)">ENVI Classic</span>
+            <span class="proj-link" style="color:var(--pink);border-color:var(--pink-dim)">CAD / SolidWorks</span>
+            <span class="proj-link" style="color:var(--pink);border-color:var(--pink-dim)">3D Printing</span>
+            <span class="proj-link" style="color:var(--gold);border-color:var(--gold-dim)">HTML / CSS / JS</span>
+            <span class="proj-link" style="color:var(--gold);border-color:var(--gold-dim)">Python</span>
+            <span class="proj-link" style="color:var(--green-crt);border-color:var(--green-dim)">PCB Design</span>
+            <span class="proj-link" style="color:var(--green-crt);border-color:var(--green-dim)">Satellite Data Analysis</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div id="projects-section" class="page-section">
+  <a href="#" class="back-to-control" onclick="showSection('hero')">← Return to Mission Control</a>
+  <div class="section-eyebrow">SYS.02 / Flight Systems</div>
+  <h2 class="section-title">The Work</h2>
+  <div class="projects-grid">
+
+    <div>
+      <div class="proj-id">Operation 01 · Remote Sensing</div>
+      <div class="proj-title">Mars & Moon · Remote Sensing Studies</div>
+      <div class="proj-desc">
+        Band stretching, false colour composites, radar reflectivity, and elevation mapping across Mars and the Moon.
+        Processing raw satellite data into something that actually tells you something — clay minerals, calderas, water.
+      </div>
+      <div class="proj-links">
+        <a href="https://drive.google.com/file/d/17qiO6_o3yXorrdWBdXRrrICzzC7MFuLq/view?usp=sharing" target="_blank" class="proj-link">Chandrayaan 1 & M3</a>
+        <a href="https://drive.google.com/file/d/1s0pgL6kSzGBNGzHF_uBj8BmqTLStFQgc/view?usp=drive_link" target="_blank" class="proj-link">GRAIL & LOLA</a>
+        <a href="https://drive.google.com/file/d/1zPC_m3wIl9sHvYNQce1bDTrCtFQytsqk/view?usp=sharing" target="_blank" class="proj-link">Viking Lander</a>
+        <a href="https://drive.google.com/file/d/17NLldqvW6ZX8k0jEqmJiixx3hKVZpVV3/view?usp=sharing" target="_blank" class="proj-link">Dragonfly · Titan</a>
+        <a href="https://docs.google.com/presentation/d/1ePrPsDjRQRiQZdBcmc88UpR5n0QmEq8zO8nnLwsgPSY/edit?usp=drive_link" target="_blank" class="proj-link">Martian Calderas</a>
+        <a href="https://drive.google.com/file/d/1OWqYnvaiAErTubq2y0Y6yvHLiF02WRB9/view?usp=drive_link" target="_blank" class="proj-link">Water on the Moon</a>
+      </div>
+    </div>
+
+    <div class="project-card pink" href="#">
+      <div class="proj-id">Operation 02 · Biomedical</div>
+      <div class="proj-title">Surgical Site Infection Monitor</div>
+      <div class="proj-desc">
+        Senior design project with Zimmer Biomet. Built a wearable device that monitors biomarkers to detect
+        post-surgical infections before they become dangerous. Responsible for the flexible PCB design, electronics,
+        and the web-based GUI. Made it to the Innovation Award finals. Third place, People's Choice.
+      </div>
+      <div class="proj-links">
+        <span class="proj-link" style="color:var(--muted);border-color:var(--border);cursor:default">Images coming soon</span>
+      </div>
+    </div>
+
+    <div class="project-card teal">
+      <div class="proj-id">Operation 03 · Mission Proposals</div>
+      <div class="proj-title">Deep Space Mission Design</div>
+      <div class="proj-desc">
+        Formal mission proposals for Callisto (BEAR Mission) and a low-Earth orbit study.
+        The kind of documents that start with "we propose to land on..." and end with a budget.
+      </div>
+      <div class="proj-links">
+        <a href="https://drive.google.com/file/d/1SXb-99z4vY-mTZLZKTLsn-Q5yTnUsUyp/view?usp=sharing" target="_blank" class="proj-link">BEAR Mission · Callisto</a>
+        <a href="https://drive.google.com/file/d/1HLKDSvyXaGjvAMLvU24l9KVU1J39XlUA/view?usp=sharing" target="_blank" class="proj-link">OCD in LEO</a>
+      </div>
+    </div>
+
+    <div class="project-card gold">
+      <div class="proj-id">Operation 04 · Field Work</div>
+      <div class="proj-title">Agrivoltaics & MDRS Simulation</div>
+      <div class="proj-desc">
+        Grew food at a Mars Desert Research Station simulation. Yes, that's a real thing.
+        Also worked on agrivoltaic systems — farming under solar panels, because if we're
+        going to live on Mars we'll need to eat something.
+      </div>
+      <div class="proj-links">
+        <span class="proj-link" style="color:var(--muted);border-color:var(--border);cursor:default">Files uploading soon</span>
+      </div>
+    </div>
+
+    <div class="project-card green">
+      <div class="proj-id">Operation 05 · Design & Fabrication</div>
+      <div class="proj-title">CAD & 3D Printing</div>
+      <div class="proj-desc">
+        Everything from instrument housing designs to prototypes that needed to survive
+        multiple iterations and not fall apart. SolidWorks, 3D printing, and the occasional
+        moment of "this actually works."
+      </div>
+      <div class="proj-links">
+        <span class="proj-link" style="color:var(--muted);border-color:var(--border);cursor:default">Portfolio uploading soon</span>
+      </div>
+    </div>
+
+    <div class="project-card pink">
+      <div class="proj-id">Operation 06 · This Website</div>
+      <div class="proj-title">You're Looking at It</div>
+      <div class="proj-desc">
+        Built from scratch with HTML, CSS, and JavaScript. Mission control aesthetic,
+        animated starfield, real-time clock, CRT typewriter intro, and a radar that goes
+        round and round for no functional reason. Worth it.
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/eshaanaworks" target="_blank" class="proj-link">GitHub</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- INSIGHTS / BLOG -->
+<div id="insights-section" class="page-section">
+  <a href="#" class="back-to-control" onclick="showSection('hero')">← Return to Mission Control</a>
+  <div class="section-eyebrow">SYS.03 / Captain's Log</div>
+  <h2 class="section-title">Insights</h2>
+
+  <!-- Sample post — delete and replace with real ones -->
+  <div class="blog-post-preview">
+    <div class="blog-date">Stardate 2025.05.20 · First Entry</div>
+    <div class="blog-title">Why I built a mission control website instead of a normal portfolio</div>
+    <div class="blog-excerpt">A normal portfolio would have been easier. A grid of projects, a nice photo, maybe a gradient. But where's the fun in that? Here's how this thing came together...</div>
+  </div>
+
+  <div class="blog-empty" style="margin-top:24px">
+    <div class="blog-empty-icon">📡</div>
+    <div class="blog-empty-title">More transmissions incoming</div>
+    <div class="blog-empty-sub">
+      &gt; SIGNAL QUEUED...<br>
+      Thoughts on space, engineering, and other things<br>
+      are currently being formatted for transmission.
+    </div>
+  </div>
+</div>
+
+<!-- PODCAST -->
+<div id="podcast-section" class="page-section">
+  <a href="#" class="back-to-control" onclick="showSection('hero')">← Return to Mission Control</a>
+  <div class="section-eyebrow">SYS.04 / Transmissions</div>
+  <h2 class="section-title">Space Doubt</h2>
+  <p class="bio-text" style="max-width:600px;margin-bottom:32px">
+    A podcast where my best friend and I yap about space, science, and whatever else is on our minds that week.
+    No script. No experts. Just two people who care too much about whether there's life on Europa.
+  </p>
+  <div style="display:flex;flex-wrap:wrap;gap:12px">
+    <a href="#" target="_blank" class="contact-link-btn teal">🎧 Spotify</a>
+    <a href="#" target="_blank" class="contact-link-btn pink">▶ YouTube</a>
+    <a href="#" target="_blank" class="contact-link-btn">📸 Instagram</a>
+  </div>
+  <div class="blog-empty" style="margin-top:32px;max-width:500px">
+    <div class="blog-empty-icon">🎙️</div>
+    <div class="blog-empty-title">Episodes coming soon</div>
+    <div class="blog-empty-sub">&gt; RECORDING IN PROGRESS...<br>Links will appear here once we figure out<br>how to edit audio without losing our minds.</div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact-section" class="page-section">
+  <a href="#" class="back-to-control" onclick="showSection('hero')">← Return to Mission Control</a>
+  <div class="section-eyebrow">SYS.05 / Comms Array</div>
+  <h2 class="section-title">Get in Touch</h2>
+  <div class="contact-terminal">
+    <div class="contact-line"><span class="prompt">&gt; </span>SIGNAL OPEN. TRANSMITTING ON ALL CHANNELS.</div>
+    <div class="contact-line" style="margin-top:12px"><span class="prompt">&gt; </span>EMAIL: <a href="mailto:eshaanaworks@gmail.com">eshaanaworks@gmail.com</a></div>
+    <div class="contact-line"><span class="prompt">&gt; </span>LINKEDIN: <a href="https://linkedin.com/in/eshaanaaurora" target="_blank">eshaanaaurora</a></div>
+    <div class="contact-line"><span class="prompt">&gt; </span>TWITTER: <a href="https://twitter.com/astroeshaana" target="_blank">@astroeshaana</a></div>
+    <div class="contact-line" style="margin-top:12px"><span class="prompt">&gt; </span>RESPONSE TIME: faster than light (mostly). <span class="crt-cursor"></span></div>
+  </div>
+  <div class="contact-links">
+    <a href="mailto:eshaanaworks@gmail.com" class="contact-link-btn gold">✉ Email</a>
+    <a href="https://linkedin.com/in/eshaanaaurora" target="_blank" class="contact-link-btn teal">in LinkedIn</a>
+    <a href="https://twitter.com/astroeshaana" target="_blank" class="contact-link-btn pink">✦ Twitter</a>
+  </div>
+</div>
+
+<!-- MUSIC PLAYER (fixed bottom right) -->
+<div id="music-player">
+  <div>
+    <div class="mp-status">♫ AMBIENT CHANNEL</div>
+    <div class="mp-track" id="mp-track-name">No track loaded</div>
+    <div id="music-file-note">Add MP3 to /music/ambient.mp3</div>
+  </div>
+  <button class="mp-btn" id="mp-play" onclick="toggleMusic()" title="Play/Pause">▶</button>
+  <button class="mp-btn" onclick="document.getElementById('music-player').style.display='none'" title="Close">✕</button>
+</div>
+<audio id="bg-music" loop>
+  <source src="music/ambient.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// ── CURSOR ──
+const cursor = document.getElementById('cursor');
+const trail  = document.getElementById('cursor-trail');
+let mx = 0, my = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top  = my + 'px';
+  setTimeout(() => {
+    trail.style.left = mx + 'px';
+    trail.style.top  = my + 'px';
+  }, 80);
+});
+
+// ── STARS ──
+const sf = document.getElementById('starfield');
+for (let i = 0; i < 180; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const sz = Math.random() * 2.5 + 0.5;
+  s.style.cssText = `
+    width:${sz}px; height:${sz}px;
+    left:${Math.random()*100}%;
+    top:${Math.random()*100}%;
+    --max:${Math.random()*0.6+0.2};
+    --d:${Math.random()*4+2}s;
+    animation-delay:${Math.random()*4}s;
+  `;
+  sf.appendChild(s);
+}
+for (let i = 0; i < 6; i++) {
+  const r = document.createElement('div');
+  r.className = 'rocket-bg';
+  r.textContent = '🚀';
+  r.style.cssText = `
+    left:${Math.random()*60}%;
+    bottom:-40px;
+    --size:${Math.floor(Math.random()*10+12)}px;
+    --dur:${Math.floor(Math.random()*8+10)}s;
+    animation-delay:${Math.random()*10}s;
+  `;
+  sf.appendChild(r);
+}
+
+// ── CLOCK ──
+function updateClock() {
+  const now = new Date();
+  const h = String(now.getUTCHours()).padStart(2,'0');
+  const m = String(now.getUTCMinutes()).padStart(2,'0');
+  const s = String(now.getUTCSeconds()).padStart(2,'0');
+  document.getElementById('utc-time').textContent = `${h}:${m}:${s}`;
+  const y = now.getUTCFullYear();
+  const mo = String(now.getUTCMonth()+1).padStart(2,'0');
+  const d = String(now.getUTCDate()).padStart(2,'0');
+  document.getElementById('stardate').textContent = `STARDATE ${y}.${mo}.${d}`;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// ── CRT TYPEWRITER ──
+const lines = [
+  { el: 'crt-name',    text: "HI! I'M ESHAANA.",    speed: 60 },
+  { el: 'crt-tagline', text: "I study planets and build things.\nSometimes both at once.", speed: 30 }
+];
+function typeWriter(elId, text, speed, cb) {
+  const el = document.getElementById(elId);
+  let i = 0;
+  function tick() {
+    if (i < text.length) {
+      el.innerHTML = text.slice(0, i+1).replace(/\n/g,'<br>');
+      i++;
+      setTimeout(tick, speed);
+    } else if (cb) cb();
+  }
+  setTimeout(tick, elId === 'crt-name' ? 1200 : 0);
+}
+typeWriter('crt-name', "HI! I'M ESHAANA.", 65, () => {
+  setTimeout(() => typeWriter('crt-tagline',
+    "I study planets and build things.\nSometimes both at once.", 28), 400);
+});
+
+// ── ORBITAL CANVAS ──
+(function() {
+  const canvas = document.getElementById('orbital-canvas');
+  const ctx = canvas.getContext('2d');
+  let t = 0;
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  function drawOrbital() {
+    const w = canvas.width, h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+    // Space bg
+    ctx.fillStyle = '#050a0e';
+    ctx.fillRect(0, 0, w, h);
+    // Stars
+    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+    [[20,30],[60,15],[130,50],[180,20],[90,80],[40,120],
+     [150,100],[200,60],[240,90],[100,140],[220,140]].forEach(([x,y]) => {
+      ctx.fillRect(x % w, y % h, 1, 1);
     });
+    // Planet (Earth-ish)
+    const cx = w*0.65, cy = h*0.55, pr = Math.min(w,h)*0.22;
+    const grd = ctx.createRadialGradient(cx-pr*0.3, cy-pr*0.3, pr*0.1, cx, cy, pr);
+    grd.addColorStop(0, '#2a5e8a');
+    grd.addColorStop(0.5, '#1a3e5a');
+    grd.addColorStop(1, '#0a1e2a');
+    ctx.beginPath();
+    ctx.arc(cx, cy, pr, 0, Math.PI*2);
+    ctx.fillStyle = grd;
+    ctx.fill();
+    // Land masses
+    ctx.fillStyle = 'rgba(74,128,74,0.7)';
+    ctx.beginPath(); ctx.ellipse(cx-pr*0.1, cy-pr*0.1, pr*0.3, pr*0.2, 0.4, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(cx+pr*0.2, cy+pr*0.1, pr*0.2, pr*0.15, -0.3, 0, Math.PI*2); ctx.fill();
+    // Atmosphere glow
+    const atm = ctx.createRadialGradient(cx, cy, pr*0.9, cx, cy, pr*1.15);
+    atm.addColorStop(0, 'rgba(100,160,220,0.2)');
+    atm.addColorStop(1, 'transparent');
+    ctx.beginPath(); ctx.arc(cx, cy, pr*1.15, 0, Math.PI*2);
+    ctx.fillStyle = atm; ctx.fill();
+    // Satellite orbit
+    ctx.strokeStyle = 'rgba(90,188,170,0.25)';
+    ctx.lineWidth = 0.5;
+    ctx.setLineDash([4,4]);
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, pr*1.6, pr*0.5, -0.3, 0, Math.PI*2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    // Satellite
+    const sa = t * 0.6;
+    const sx = cx + Math.cos(sa) * pr * 1.6 * Math.cos(0.3) - Math.sin(sa) * pr * 0.5 * Math.sin(0.3);
+    const sy = cy + Math.cos(sa) * pr * 1.6 * Math.sin(0.3) + Math.sin(sa) * pr * 0.5 * Math.cos(0.3);
+    ctx.fillStyle = '#c8b96a';
+    ctx.font = '12px serif';
+    ctx.fillText('🛰️', sx-6, sy+5);
+    t += 0.012;
+    requestAnimationFrame(drawOrbital);
+  }
+  drawOrbital();
+})();
+
+// ── RADAR CANVAS ──
+(function() {
+  const canvas = document.getElementById('radar-canvas');
+  const ctx = canvas.getContext('2d');
+  let angle = 0;
+  function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  const blips = Array.from({length:6}, () => ({
+    r: Math.random()*0.75+0.1,
+    a: Math.random()*Math.PI*2,
+    fade: 0
+  }));
+  function drawRadar() {
+    const w = canvas.width, h = canvas.height;
+    const cx = w/2, cy = h/2;
+    const r = Math.min(w,h)*0.42;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle = '#020a06'; ctx.fillRect(0,0,w,h);
+    // Grid rings
+    [0.25,0.5,0.75,1].forEach(f => {
+      ctx.strokeStyle = `rgba(74,158,106,${0.08+f*0.05})`;
+      ctx.lineWidth = 0.5;
+      ctx.beginPath(); ctx.arc(cx,cy,r*f,0,Math.PI*2); ctx.stroke();
+    });
+    // Grid lines
+    [0,45,90,135].forEach(deg => {
+      const rad = deg*Math.PI/180;
+      ctx.strokeStyle = 'rgba(74,158,106,0.08)'; ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      ctx.moveTo(cx+Math.cos(rad)*r, cy+Math.sin(rad)*r);
+      ctx.lineTo(cx-Math.cos(rad)*r, cy-Math.sin(rad)*r);
+      ctx.stroke();
+    });
+    // Sweep
+    const sweepGrd = ctx.createConicalGradient
+      ? null
+      : null;
+    ctx.save(); ctx.translate(cx,cy); ctx.rotate(angle);
+    const sg = ctx.createLinearGradient(0,0,r,0);
+    sg.addColorStop(0,'rgba(74,158,106,0)');
+    sg.addColorStop(0.7,'rgba(74,158,106,0.06)');
+    sg.addColorStop(1,'rgba(74,158,106,0.3)');
+    ctx.beginPath(); ctx.moveTo(0,0); ctx.arc(0,0,r,-0.5,0.5); ctx.closePath();
+    ctx.fillStyle = sg; ctx.fill(); ctx.restore();
+    // Blips
+    blips.forEach(b => {
+      const da = ((angle - b.a) % (Math.PI*2) + Math.PI*2) % (Math.PI*2);
+      if (da < 0.15) b.fade = 1;
+      b.fade = Math.max(0, b.fade - 0.004);
+      if (b.fade > 0) {
+        const bx = cx + Math.cos(b.a)*b.r*r;
+        const by = cy + Math.sin(b.a)*b.r*r;
+        ctx.beginPath(); ctx.arc(bx,by,2,0,Math.PI*2);
+        ctx.fillStyle = `rgba(90,188,170,${b.fade})`; ctx.fill();
+      }
+    });
+    // Center dot
+    ctx.beginPath(); ctx.arc(cx,cy,2,0,Math.PI*2);
+    ctx.fillStyle = '#e06090'; ctx.fill();
+    // YOU ARE HERE arrow
+    ctx.fillStyle = 'rgba(224,96,144,0.6)';
+    ctx.font = '7px IBM Plex Mono';
+    ctx.fillText('●', cx-3, cy-2);
+    angle += 0.025;
+    requestAnimationFrame(drawRadar);
+  }
+  drawRadar();
+})();
+
+// ── GALACTIC RADAR (smaller) ──
+(function() {
+  const canvas = document.getElementById('galactic-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let angle = 0;
+  function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  function draw() {
+    const w = canvas.width, h = canvas.height;
+    const cx = w/2, cy = h/2, r = Math.min(w,h)*0.42;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle = '#020a06'; ctx.fillRect(0,0,w,h);
+    [0.33,0.66,1].forEach(f => {
+      ctx.strokeStyle = `rgba(74,158,106,0.1)`; ctx.lineWidth = 0.5;
+      ctx.beginPath(); ctx.arc(cx,cy,r*f,0,Math.PI*2); ctx.stroke();
+    });
+    ctx.save(); ctx.translate(cx,cy); ctx.rotate(angle);
+    const sg = ctx.createLinearGradient(0,0,r,0);
+    sg.addColorStop(0,'rgba(74,158,106,0)');
+    sg.addColorStop(1,'rgba(74,158,106,0.25)');
+    ctx.beginPath(); ctx.moveTo(0,0); ctx.arc(0,0,r,-0.4,0.4); ctx.closePath();
+    ctx.fillStyle = sg; ctx.fill(); ctx.restore();
+    ctx.beginPath(); ctx.arc(cx,cy,2,0,Math.PI*2);
+    ctx.fillStyle = '#e06090'; ctx.fill();
+    angle += 0.03;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── TELEMETRY CANVAS ──
+(function() {
+  const canvas = document.getElementById('tele-canvas');
+  const ctx = canvas.getContext('2d');
+  const pts = Array.from({length:40}, () => Math.random()*0.6+0.2);
+  function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  function draw() {
+    const w = canvas.width, h = canvas.height;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle = '#020a06'; ctx.fillRect(0,0,w,h);
+    pts.push(Math.max(0.1, Math.min(0.9, pts[pts.length-1]+(Math.random()-0.48)*0.12)));
+    if (pts.length > 60) pts.shift();
+    ctx.strokeStyle = '#e06090'; ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    pts.forEach((p,i) => {
+      const x = (i/(pts.length-1))*w;
+      const y = h - p*h*0.8 - h*0.1;
+      i === 0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+    // Fill under
+    ctx.lineTo(w, h); ctx.lineTo(0, h); ctx.closePath();
+    ctx.fillStyle = 'rgba(224,96,144,0.04)'; ctx.fill();
+    setTimeout(draw, 120);
+  }
+  draw();
+})();
+
+// ── SECTION NAVIGATION ──
+const sections = ['hero','about','projects','insights','podcast','contact'];
+function showSection(id) {
+  sections.forEach(s => {
+    const el = document.getElementById(s === 'hero' ? 'app' : s+'-section');
+    if (el) el.style.display = 'none';
   });
+  const target = document.getElementById(id === 'hero' ? 'app' : id+'-section');
+  if (target) {
+    target.style.display = id === 'hero' ? 'block' : 'block';
+    target.classList.add('fade-in');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  return false;
+}
+// Show hero on load
+showSection('hero');
 
+// ── MUSIC ──
+let musicPlaying = false;
+const audio = document.getElementById('bg-music');
+function toggleMusic() {
+  const btn = document.getElementById('mp-play');
+  if (musicPlaying) {
+    audio.pause(); btn.textContent = '▶'; musicPlaying = false;
+  } else {
+    audio.play().then(() => {
+      btn.textContent = '⏸'; musicPlaying = true;
+      document.getElementById('music-file-note').style.display = 'none';
+      document.getElementById('mp-track-name').textContent = 'ambient.mp3';
+    }).catch(() => {
+      document.getElementById('mp-track-name').textContent = 'No file found';
+    });
+  }
+}
 </script>
-
 </body>
 </html>
